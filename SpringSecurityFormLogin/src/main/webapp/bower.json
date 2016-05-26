@@ -1,0 +1,26 @@
+{
+  "name": "webapp",
+  "description": "Spring boot security login tutorial with angularjs and materialize-css",
+  "main": "",
+  "keywords": [
+    "spring",
+    "spring-security",
+    "spring-boot",
+    "angularjs",
+    "materialize-css",
+    "aymen",
+    "naili"
+  ],
+  "authors": [
+    "Aymen Naili"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
