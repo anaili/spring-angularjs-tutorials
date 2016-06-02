@@ -1,7 +1,6 @@
 package com.naili.spring.config.security;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,13 +12,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class WebApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
 
-	@Inject AjaxAuthenticationSuccessHandler successHandler;
+	@Autowired AjaxAuthenticationSuccessHandler successHandler;
 	
-	@Inject AjaxAuthenticationFailureHandler failureHandler;
+	@Autowired AjaxAuthenticationFailureHandler failureHandler;
 	
-	@Inject UnauthorizedAuthenticationEntryPoint authenticationEntryPoint;
+	@Autowired UnauthorizedAuthenticationEntryPoint authenticationEntryPoint;
 	
-	@Inject AjaxLogoutSuccessHandler logoutSuccessHandler; 
+	@Autowired AjaxLogoutSuccessHandler logoutSuccessHandler; 
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -37,20 +36,24 @@ public class WebApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf()
-			.disable()
+				.disable()
+			.authorizeRequests()
+				.anyRequest()
+				.authenticated()
+				.and()
 			.formLogin()
 				.loginProcessingUrl("/autenticate") //change this to something unpredictable.
 				.successHandler(successHandler)
 				.failureHandler(failureHandler)
 				.permitAll()
-			.and()
-				.logout()
+				.and()
+			.logout()
 				.logoutUrl("/disconnect")
 				.deleteCookies("JSESSIONID")
 				.invalidateHttpSession(true)
 				.logoutSuccessHandler(logoutSuccessHandler)
-			.and()
-				.exceptionHandling()
+				.and()
+			.exceptionHandling()
 				.authenticationEntryPoint(authenticationEntryPoint);
 	}
 
