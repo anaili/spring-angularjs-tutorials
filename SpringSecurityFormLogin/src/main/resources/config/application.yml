@@ -8,4 +8,4 @@ server:
     timeout: 30
     
 banner:
-  location: banner.txt
+  location: config/banner.txt

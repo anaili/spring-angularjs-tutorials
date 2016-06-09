@@ -30,7 +30,15 @@ public class WebApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		//ignore assets and static resources here.
+		web
+			.ignoring()
+			.antMatchers("/")
+			.antMatchers("/index.html")
+			.antMatchers("/favicon.ico")
+			.antMatchers("/bower_components/**")
+			.antMatchers("/app/app.js")
+			.antMatchers("/app/login/*")
+			.antMatchers("/app/auth/*");
 	}
 
 	@Override
@@ -42,7 +50,9 @@ public class WebApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
 				.authenticated()
 				.and()
 			.formLogin()
-				.loginProcessingUrl("/autenticate") //change this to something unpredictable.
+				.loginProcessingUrl("/authenticate") //change this to something unpredictable.
+				.usernameParameter("username")
+				.passwordParameter("password")
 				.successHandler(successHandler)
 				.failureHandler(failureHandler)
 				.permitAll()

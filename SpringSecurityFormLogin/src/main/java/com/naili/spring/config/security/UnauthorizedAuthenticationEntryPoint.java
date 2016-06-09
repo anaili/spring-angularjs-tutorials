@@ -18,7 +18,7 @@ public class UnauthorizedAuthenticationEntryPoint implements AuthenticationEntry
 			AuthenticationException authException) throws IOException, ServletException {
 		//By default spring redirect to login page. In our case we need only to get
 		//a 401 HTTP error code the let angularjs take care of the authentication.
-		response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "aaaaaa");
 	}
 
 }
