@@ -1,12 +1,16 @@
 package com.naili.spring.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 import org.springframework.context.annotation.Configuration;
+
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -20,12 +24,19 @@ public class WebApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired AjaxLogoutSuccessHandler logoutSuccessHandler; 
 	
+	@Autowired @Qualifier("JpaUserDetailsService") UserDetailsService jpaUserDetailsService;
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
+		/*auth.inMemoryAuthentication()
+			.withUser("admin")
+				.password("admin")
+				.authorities("admin")
+				.and()
 			.withUser("user")
-				.password("secret")
-				.authorities("admin");
+				.password("user")
+				.authorities("user");*/
+		auth.userDetailsService(jpaUserDetailsService);
 	}
 
 	@Override
@@ -33,12 +44,11 @@ public class WebApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
 		web
 			.ignoring()
 			.antMatchers("/")
+			.antMatchers("/db-console/**")
 			.antMatchers("/index.html")
 			.antMatchers("/favicon.ico")
 			.antMatchers("/bower_components/**")
-			.antMatchers("/app/app.js")
-			.antMatchers("/app/login/*")
-			.antMatchers("/app/auth/*");
+			.antMatchers("/app/**");
 	}
 
 	@Override
@@ -50,7 +60,7 @@ public class WebApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
 				.authenticated()
 				.and()
 			.formLogin()
-				.loginProcessingUrl("/authenticate") //change this to something unpredictable.
+				.loginProcessingUrl("/login") //change this to something unpredictable.
 				.usernameParameter("username")
 				.passwordParameter("password")
 				.successHandler(successHandler)
@@ -58,7 +68,7 @@ public class WebApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
 				.permitAll()
 				.and()
 			.logout()
-				.logoutUrl("/disconnect")
+				.logoutUrl("/logout")
 				.deleteCookies("JSESSIONID")
 				.invalidateHttpSession(true)
 				.logoutSuccessHandler(logoutSuccessHandler)

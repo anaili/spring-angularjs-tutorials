@@ -1,35 +1,49 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
+
+<!--Import materialize.css-->
+<link type="text/css" href="http://materializecss.com/css/ghpages-materialize.css" rel="stylesheet" media="screen,projection" />
+
 <!--Import Google Icon Font-->
 <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
-<!--Import materialize.css-->
-<link type="text/css" href="bower_components/Materialize/dist/css/materialize.min.css" rel="stylesheet" media="screen,projection" />
-
+<!--Import jQuery before materialize.js-->
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="bower_components/Materialize/dist/js/materialize.min.js"></script>
 
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- required for html5 mode -->
+<base href="/">
+
+<style type="text/css">
+
+body{
+	background-image: url("bower_components/crossword.png");
+	background-repeat: repeat;
+}
+
+</style>
+
 </head>
 
 <body>
-
+	
 	<div class="container" ng-view>
-		
+			
 	</div>
 
-	<!--Import jQuery before materialize.js-->
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
 	
 	<!-- Application controllers, services -->
 	<script src="app/app.js"></script>
-	<script src="app/login/login.controller.js"></script>
 	<script src="app/auth/auth.service.js"></script>
+	<script src="app/login/login.controller.js"></script>
 	<script src="app/home/home.controller.js"></script>
 	
 </body>

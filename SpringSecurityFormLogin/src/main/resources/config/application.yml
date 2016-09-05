@@ -1,11 +1,26 @@
 spring:
   application:
     name: Spring Security Tutorial with AngularJs
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    generate-ddl: true
+  datasource:
+    url: jdbc:h2:mem:tutorial-db
+    name: 
+    username: 
+    password: 
+
+  h2:
+    console:
+      enabled: true
+      path: /db-console
 
 server:
   port: 28080
   session:
-    timeout: 30
-    
+    timeout: 30    
+
 banner:
   location: config/banner.txt
