@@ -1,0 +1,20 @@
+{
+  "name": "webapp",
+  "version": "1.0.0",
+  "description": "Basic HTTP Security + Boot + Node + Gulp + Bootstrap + Jquery + AngularJS",
+  "main": "index.js",
+  "scripts": {
+  	"bower-install" : "bower install",
+  	"bower-list" : "bower list",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aymen Naili",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-angular-filesort": "^1.1.1",
+    "gulp-inject": "^4.1.0",
+    "gulp-less": "^3.1.0",
+    "main-bower-files": "^2.13.1"
+  }
+}
