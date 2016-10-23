@@ -1,0 +1,37 @@
+spring:
+
+  application:
+    name: "Sring boot security with Basic HTTP and AngularJS"
+
+  jpa:
+    database: h2
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: true
+
+  datasource:
+    name:
+    username: 
+    password: 
+    url: jdbc:h2:mem:basic-http-db
+
+  h2:
+    console:
+      enabled: true
+      path: /db
+      settings:
+        trace: true
+  
+debug: true
+
+server:
+  address: localhost
+  port: 38080
+  session:
+    timeout: 30
+    cookie:
+      max-age: 30
+      secure: true
+
+
